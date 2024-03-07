@@ -1,2 +1,2 @@
-# Coodewizard
+# Codewizard
 ALL CODEWIZARD PROJECTS

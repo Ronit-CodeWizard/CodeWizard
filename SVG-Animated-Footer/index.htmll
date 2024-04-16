@@ -85,9 +85,9 @@
 
     <section>
       <ul class="socials">
-        <li><a href="https://www.instagram.com/gevstack/"><i class="ri-instagram-fill icon"></i></a></li>
-        <li><a href="https://www.linkedin.com/in/gevendrasahu/"><i class="ri-linkedin-box-fill icon"></i></a></li>
-        <li><a href="https://github.com/gevendra2004"><i class="ri-github-fill icon"></i></a></li>
+        <li><a href="https://www.instagram.com/itz_codewizard/"><i class="ri-instagram-fill icon"></i></a></li>
+        <li><a href="#"><i class="ri-linkedin-box-fill icon"></i></a></li>
+        <li><a href="https://github.com/Ronit-CodeWizard/"><i class="ri-github-fill icon"></i></a></li>
         <li><a href="#"><i class="ri-twitter-x-fill icon"></i></a></li>
       </ul>
       <ul class="links">
@@ -97,7 +97,7 @@
         <li><a>Team</a></li>
         <li><a>Contact</a></li>
       </ul>
-      <p class="legal">© 2023 All rights reserved - Gevstack</p>
+      <p class="legal">© 2024 All rights reserved - CodeWizard</p>
     </section>
   </footer>
 </body>

@@ -12,7 +12,7 @@ const texts = [
     "Give",
     "a Love",
     ":)",
-    "by @GevStack"
+    "by @CodeWizard"
 ];
 
 const morphTime = 1;

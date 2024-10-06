@@ -21,7 +21,7 @@
 .truckBody {
   width: 130px;
   height: fit-content;
-  margin-bottom: 6px;
+  margin-bottom: 10px;
   animation: motion 1s linear infinite;
 }
 /* truck suspension animation*/
@@ -38,7 +38,7 @@
 }
 /* truck's tires */
 .truckTires {
-  width: 130px;
+  width: 110px;
   height: fit-content;
   display: flex;
   align-items: center;

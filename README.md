@@ -8,7 +8,7 @@
 
 Explore all my interactive and creative frontend projects in one place:
 
-### 👉 [View All Projects Here](https://ronit-codewizard.github.io/CodeWizard))
+### 👉 [View All Projects Here](https://your-link-here.com)
 
 From animated input fields to beautiful tab bars and loaders — it's all there!
 
@@ -16,9 +16,9 @@ From animated input fields to beautiful tab bars and loaders — it's all there!
 
 ## 🔗 Let's Connect
 
-- [GitHub](https://github.com/your-username)
-- [LinkedIn](https://linkedin.com/in/your-profile)
-- [Instagram](https://instagram.com/your-handle)
+- [GitHub](https://github.com/Ronit-CodeWizard) 
+- [Social Links](https://bento.me/Ronit-CodeWizard)
+- [LinkedIn](https://www.linkedin.com/in/ronit-majhi)
 
 ---
 

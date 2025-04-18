@@ -8,7 +8,7 @@
 
 Explore all my interactive and creative frontend projects in one place:
 
-### 👉 [View All Projects Here](https://your-link-here.com)
+### 👉 [View All Projects Here](https://ronit-codewizard.github.io/CodeWizard))
 
 From animated input fields to beautiful tab bars and loaders — it's all there!
 

@@ -6,29 +6,19 @@
 
 ## 🚀 Projects Showcase
 
-| Project Name                 | Live Demo | Source Code |
-|-----------------------------|-----------|-------------|
-| Animated Input Field        | [Demo](#) | [Code](#)   |
-| CSS Tab Indicator           | [Demo](#) | [Code](#)   |
-| Dark Text Animation         | [Demo](#) | [Code](#)   |
-| Dropdown Menu               | [Demo](#) | [Code](#)   |
-| Impossibly Tipsy Animation  | [Demo](#) | [Code](#)   |
-| Modern Contact Card         | [Demo](#) | [Code](#)   |
-| SVG Animated Footer         | [Demo](#) | [Code](#)   |
-| Smooth Card Animation       | [Demo](#) | [Code](#)   |
-| Tab Menu Bar                | [Demo](#) | [Code](#)   |
-| Text Water Effect           | [Demo](#) | [Code](#)   |
-| Truck Loader                | [Demo](#) | [Code](#)   |
-| Valentine Day Card          | [Demo](#) | [Code](#)   |
-| Button Click Animation      | [Demo](#) | [Code](#)   |
+Explore all my interactive and creative frontend projects in one place:
+
+### 👉 [View All Projects Here](https://your-link-here.com)
+
+From animated input fields to beautiful tab bars and loaders — it's all there!
 
 ---
 
 ## 🔗 Let's Connect
 
-- [GitHub](#)
-- [LinkedIn](#)
-- [Instagram](#)
+- [GitHub](https://github.com/your-username)
+- [LinkedIn](https://linkedin.com/in/your-profile)
+- [Instagram](https://instagram.com/your-handle)
 
 ---
 

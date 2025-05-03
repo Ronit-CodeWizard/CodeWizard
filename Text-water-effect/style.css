@@ -31,11 +31,11 @@ body{
 
 .content h1:nth-child(1){
     color:transparent;
-    -webkit-text-stroke: 1px #28f6c2;
+    -webkit-text-stroke: 1px #fbb62e;
 }
 
 .content h1:nth-child(2){
-    color: #28f6c2;
+    color: #fbb62e;
     animation: animate 4s ease-in-out infinite;
 }
 

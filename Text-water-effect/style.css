@@ -35,7 +35,7 @@ body {
 
 .content h1:nth-child(1) {
     color: transparent;
-    -webkit-text-stroke: 1px #fbb62e;
+    -webkit-text-stroke: 0.5px #fbb62e;
 }
 
 .content h1:nth-child(2) {

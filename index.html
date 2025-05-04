@@ -40,28 +40,6 @@
       position: relative;
     }
 
-    .header-container::before,
-    .header-container::after {
-      content: "";
-      position: absolute;
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      background: radial-gradient(circle, #d1c4e9, #b39ddb);
-      z-index: 0;
-      opacity: 0.4;
-    }
-
-    .header-container::before {
-      top: -40px;
-      left: -50px;
-    }
-
-    .header-container::after {
-      top: -40px;
-      right: -50px;
-    }
-
     .projects-wrapper {
       max-width: 800px;
       margin: auto;
@@ -140,7 +118,7 @@
   </div>
 
   <div class="projects-wrapper" id="projects-wrapper">
-    <!-- Cards will be injected here -->
+    <!-- Project cards will be injected here -->
   </div>
 
   <script>
@@ -153,21 +131,29 @@
         const res = await fetch(`https://api.github.com/repos/${username}/${repo}/contents`);
         const data = await res.json();
 
-        data.forEach(item => {
-          if (item.type === "dir") {
-            const projectName = item.name.replace(/-/g, ' ');
-            const card = document.createElement('div');
-            card.className = 'project-card';
-            card.innerHTML = `
-              <div class="project-name">${projectName}</div>
-              <div class="button-group">
-                <a href="https://${username}.github.io/${repo}/${item.name}" target="_blank">Live Demo</a>
-                <a href="https://github.com/${username}/${repo}/tree/main/${item.name}" target="_blank">Source Code</a>
-              </div>
-            `;
-            wrapper.appendChild(card);
-          }
+        const projects = data
+          .filter(item => item.type === "dir")
+          .sort((a, b) => a.name.localeCompare(b.name));
+
+        if (projects.length === 0) {
+          wrapper.innerHTML = '<p>No projects found in the repository.</p>';
+          return;
+        }
+
+        projects.forEach(item => {
+          const projectName = item.name.replace(/-/g, ' ');
+          const card = document.createElement('div');
+          card.className = 'project-card';
+          card.innerHTML = `
+            <div class="project-name">${projectName}</div>
+            <div class="button-group">
+              <a href="https://${username}.github.io/${repo}/${item.name}" target="_blank">Live Demo</a>
+              <a href="https://github.com/${username}/${repo}/tree/main/${item.name}" target="_blank">Source Code</a>
+            </div>
+          `;
+          wrapper.appendChild(card);
         });
+
       } catch (error) {
         console.error('Error fetching projects:', error);
         wrapper.innerHTML = '<p>Failed to load projects. Please try again later.</p>';

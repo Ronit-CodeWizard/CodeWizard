@@ -140,34 +140,28 @@
   </div>
 
   <div class="projects-wrapper" id="projects-wrapper">
+    <!-- Cards will be injected here -->
   </div>
 
   <script>
     const username = 'ronit-codewizard';
     const repo = 'CodeWizard';
     const wrapper = document.getElementById('projects-wrapper');
-    const loadingMessage = document.getElementById('loading-message');
 
     async function fetchProjects() {
       try {
         const res = await fetch(`https://api.github.com/repos/${username}/${repo}/contents`);
         const data = await res.json();
 
-        // Filter only directories (folders), then sort them alphabetically
         const projects = data.filter(item => item.type === "dir").sort((a, b) => a.name.localeCompare(b.name));
 
-        // Remove loading message once data is loaded
-        loadingMessage.remove();
-
-        // Check if there are any projects to display
         if (projects.length === 0) {
           wrapper.innerHTML = '<p>No projects found in the repository.</p>';
           return;
         }
 
-        // Inject project cards
         projects.forEach(item => {
-          const projectName = item.name.replace(/-/g, ' '); // Replace hyphens with spaces
+          const projectName = item.name.replace(/-/g, ' ');
           const card = document.createElement('div');
           card.className = 'project-card';
           card.innerHTML = `

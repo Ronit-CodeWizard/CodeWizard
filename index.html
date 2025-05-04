@@ -40,6 +40,28 @@
       position: relative;
     }
 
+    .header-container::before,
+    .header-container::after {
+      content: "";
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #d1c4e9, #b39ddb);
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    .header-container::before {
+      top: -40px;
+      left: -50px;
+    }
+
+    .header-container::after {
+      top: -40px;
+      right: -50px;
+    }
+
     .projects-wrapper {
       max-width: 800px;
       margin: auto;
@@ -118,30 +140,36 @@
   </div>
 
   <div class="projects-wrapper" id="projects-wrapper">
-    <!-- Project cards will be injected here -->
+    <!-- Cards will be injected here -->
+    <p id="loading-message">Loading projects...</p>
   </div>
 
   <script>
     const username = 'ronit-codewizard';
     const repo = 'CodeWizard';
     const wrapper = document.getElementById('projects-wrapper');
+    const loadingMessage = document.getElementById('loading-message');
 
     async function fetchProjects() {
       try {
         const res = await fetch(`https://api.github.com/repos/${username}/${repo}/contents`);
         const data = await res.json();
 
-        const projects = data
-          .filter(item => item.type === "dir")
-          .sort((a, b) => a.name.localeCompare(b.name));
+        // Filter only directories (folders), then sort them alphabetically
+        const projects = data.filter(item => item.type === "dir").sort((a, b) => a.name.localeCompare(b.name));
 
+        // Remove loading message once data is loaded
+        loadingMessage.remove();
+
+        // Check if there are any projects to display
         if (projects.length === 0) {
           wrapper.innerHTML = '<p>No projects found in the repository.</p>';
           return;
         }
 
+        // Inject project cards
         projects.forEach(item => {
-          const projectName = item.name.replace(/-/g, ' ');
+          const projectName = item.name.replace(/-/g, ' '); // Replace hyphens with spaces
           const card = document.createElement('div');
           card.className = 'project-card';
           card.innerHTML = `

@@ -1,186 +1,491 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>CodeWizard — Developer Portfolio</title>
+<meta name="description" content="CodeWizard — Full-Stack Developer portfolio. Projects, skills, and contact. Dynamic GitHub-powered projects." />
+<!-- Inter font (keeps design professional). It's acceptable to reference Google Fonts in a single file. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ================================
+     CSS Custom Properties (themes)
+     ================================ */
+  :root{
+    --transition-fast: 0.25s;
+    --transition-med: 0.35s;
+    --bg: #ffffff;
+    --card: #f7f9fc;
+    --muted: #6b7280;
+    --text: #0f172a;
+    --accent-1: linear-gradient(135deg,#4f46e5,#06b6d4);
+    --accent-2: linear-gradient(135deg,#ff7ab6,#ffb86b);
+    --glass: rgba(255,255,255,0.55);
+    --glass-2: rgba(255,255,255,0.3);
+    --shadow-sm: 0 4px 8px rgba(15,23,42,0.05);
+    --shadow-md: 0 8px 24px rgba(15,23,42,0.08);
+    --radius-lg: 16px;
+    --radius-md: 12px;
+    --max-width: 1200px;
+    --focus-outline: 3px solid rgba(99,102,241,0.22);
+  }
+
+  [data-theme="dark"]{
+    --bg: #05060a;
+    --card: rgba(18,18,20,0.55);
+    --muted: #9ca3af;
+    --text: #e6eef8;
+    --glass: rgba(10,10,12,0.45);
+    --glass-2: rgba(10,10,12,0.25);
+    --shadow-sm: 0 6px 18px rgba(0,0,0,0.5);
+    --shadow-md: 0 12px 40px rgba(0,0,0,0.65);
+  }
+
+  /* Reset & base */
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: radial-gradient(1000px 400px at 10% 10%, rgba(99,102,241,0.06), transparent),
+                radial-gradient(700px 300px at 90% 90%, rgba(6,182,212,0.03), transparent),
+                var(--bg);
+    color:var(--text);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    transition: background var(--transition-med) ease, color var(--transition-med) ease;
+    padding-bottom:80px;
+  }
+
+  .container{
+    width:100%;
+    max-width:var(--max-width);
+    margin:0 auto;
+    padding:2rem;
+  }
+
+  /* =============================
+     Navigation - glass morph
+     ============================= */
+  nav.top-nav{
+    position:fixed;
+    left:0;
+    right:0;
+    top:12px;
+    z-index:60;
+    display:flex;
+    justify-content:center;
+    pointer-events:none; /* child handles pointer events */
+  }
+  .nav-inner{
+    pointer-events:auto;
+    width:calc(100% - 2rem);
+    max-width:var(--max-width);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:1rem;
+    padding:12px 18px;
+    border-radius:14px;
+    backdrop-filter: blur(10px) saturate(130%);
+    background: linear-gradient(180deg, var(--glass), var(--glass-2));
+    box-shadow: var(--shadow-md);
+    border:1px solid rgba(255,255,255,0.06);
+    transition: transform var(--transition-fast);
+  }
+  .brand{
+    display:flex;
+    gap:12px;
+    align-items:center;
+  }
+  .logo{
+    width:44px;height:44px;border-radius:10px;
+    background:linear-gradient(135deg,#4f46e5,#06b6d4);
+    display:grid;place-items:center;color:white;font-weight:700;font-size:1.05rem;
+    box-shadow:0 6px 20px rgba(79,70,229,0.12);
+  }
+  .nav-links{
+    display:flex;gap:12px;align-items:center;
+  }
+  .nav-links a{
+    text-decoration:none;color:var(--muted);font-weight:600;padding:8px 12px;border-radius:10px;
+    transition: all var(--transition-fast);
+  }
+  .nav-links a:focus, .nav-links a:hover{
+    color:var(--text);transform:translateY(-3px);
+  }
+
+  /* Mobile hamburger */
+  .menu-btn{
+    display:none;
+    background:transparent;border:none;color:var(--muted);font-size:1.1rem;padding:8px;border-radius:10px;
+  }
+
+  /* Theme toggle */
+  .controls{display:flex;gap:10px;align-items:center;}
+  .toggle{
+    display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:transparent;border:1px solid rgba(0,0,0,0.06);
+  }
+  .toggle button{
+    border:0;background:transparent;padding:6px;border-radius:8px;cursor:pointer;font-weight:700;
+  }
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+  /* =============================
+     Hero
+     ============================= */
+  .hero{
+    margin-top:84px;
+    display:grid;
+    grid-template-columns: 1fr 400px;
+    gap:28px;
+    align-items:start;
+    padding:3rem 0 2rem;
+  }
+  @media (max-width:990px){
+    .hero{grid-template-columns:1fr;gap:18px}
+  }
+  .hero-card{
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+    padding:28px;border-radius:var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    backdrop-filter: blur(6px);
+  }
+  .title{
+    font-size:4.5rem;
+    line-height:1;
+    margin:0;
+    background:linear-gradient(90deg,#7c3aed,#06b6d4);
+    -webkit-background-clip:text;color:transparent;
+    font-weight:800;
+  }
+  @media (max-width:480px){
+    .title{font-size:2.6rem}
+  }
+  .subtitle{font-size:1.12rem;color:var(--muted);margin-top:10px}
+  .badge{
+    display:inline-flex;align-items:center;gap:10px;padding:8px 12px;border-radius:999px;margin-top:16px;
+    background:linear-gradient(180deg, rgba(34,197,94,0.12), rgba(34,197,94,0.06));
+    color: #065f46;font-weight:700;
+  }
+  .pulse-dot{
+    width:10px;height:10px;border-radius:10px;background:#10b981;position:relative;
+    box-shadow:0 6px 14px rgba(16,185,129,0.18);
+    animation:pulse 1.6s infinite;
+  }
+  @keyframes pulse{
+    0%{transform:scale(.9);opacity:1}
+    70%{transform:scale(1.9);opacity:0}
+    100%{transform:scale(.9);opacity:0}
+  }
+
+  .hero-ctas{margin-top:18px;display:flex;gap:12px;flex-wrap:wrap}
+  .btn{
+    padding:12px 16px;border-radius:12px;border:0;font-weight:700;cursor:pointer;
+    transition:transform var(--transition-fast), box-shadow var(--transition-fast), opacity var(--transition-fast);
+    box-shadow:var(--shadow-sm);
+  }
+  .btn-primary{
+    background:linear-gradient(90deg,#4f46e5,#06b6d4);color:white;
+  }
+  .btn-ghost{
+    background:transparent;border:1px solid rgba(99,102,241,0.12);color:var(--text);
+  }
+  .btn:focus{outline:none;box-shadow:var(--focus-outline)}
+
+  /* Right card with stats preview */
+  .hero-side{
+    padding:18px;border-radius:14px;background:linear-gradient(135deg, rgba(99,102,241,0.06), transparent);
+    display:flex;flex-direction:column;gap:12px;align-items:stretch;
+  }
+
+  /* =============================
+     Stats section
+     ============================= */
+  .stats{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:24px;
+  }
+  @media (max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:480px){.stats{grid-template-columns:1fr}}
+  .stat-card{
+    background:var(--card);padding:18px;border-radius:14px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:8px;
+    transition:transform var(--transition-fast), box-shadow var(--transition-fast);
+  }
+  .stat-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-md)}
+  .stat-num{font-size:1.6rem;font-weight:800}
+  .stat-label{color:var(--muted);font-weight:600}
+
+  /* =============================
+     Skills
+     ============================= */
+  .skills{
+    margin-top:34px;padding:18px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);box-shadow:var(--shadow-md);
+  }
+  .skill-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:12px}
+  .skill{
+    padding:12px;border-radius:12px;background:var(--card);display:flex;align-items:center;gap:10px;box-shadow:var(--shadow-sm);
+    transition:transform var(--transition-fast);
+  }
+  .skill:hover{transform:translateY(-6px)}
+  .skill .icon{font-size:1.6rem}
+  .skill .meta{display:flex;flex-direction:column}
+  .skill .name{font-weight:700}
+  .skill .level{font-size:0.85rem;color:var(--muted)}
+
+  /* =============================
+     Projects
+     ============================= */
+  .projects{
+    margin-top:28px;
+  }
+  .projects-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:16px;
+    margin-top:16px;
+  }
+  .project-card{
+    border-radius:14px;padding:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+    box-shadow:var(--shadow-md);position:relative;overflow:hidden;transform:translateY(14px);opacity:0;
+    transition:transform 0.5s cubic-bezier(.2,.9,.2,1),opacity 0.35s ease;
+    display:flex;flex-direction:column;gap:12px;
+  }
+  .project-card.visible{transform:none;opacity:1}
+  .project-header{display:flex;gap:12px;align-items:center;justify-content:space-between}
+  .project-title{font-weight:800;display:flex;gap:8px;align-items:center}
+  .project-desc{color:var(--muted);font-size:0.95rem}
+  .project-meta{display:flex;gap:8px;flex-wrap:wrap}
+  .tech-badge{padding:6px 8px;border-radius:999px;font-weight:700;background:linear-gradient(90deg, rgba(255,255,255,0.03), transparent);font-size:0.8rem}
+  .project-actions{display:flex;gap:8px;margin-top:auto}
+  .small-btn{padding:8px 10px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
+  .live{background:linear-gradient(90deg,#06b6d4,#4f46e5);color:white}
+  .code{background:transparent;border:1px solid rgba(99,102,241,0.12)}
+  .project-stats{display:flex;gap:8px;color:var(--muted);font-weight:700;font-size:0.85rem;align-items:center}
+
+  /* Hover lift and gradient overlay */
+  .project-card::after{
+    content:"";position:absolute;inset:0;background:linear-gradient(135deg, rgba(79,70,229,0.08), rgba(6,182,212,0.02));opacity:0;transition:opacity var(--transition-fast);
+  }
+  .project-card:hover::after{opacity:1;transform:translateY(-2px)}
+  .project-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-md)}
+
+  /* Floating decorative shapes */
+  .float-shape{
+    position:fixed;right:8%;top:20%;width:220px;height:220px;border-radius:22px;z-index:0;pointer-events:none;opacity:0.12;
+    background:linear-gradient(135deg,#7c3aed,#06b6d4);
+    filter:blur(36px);transform:translateZ(0);animation:floaty 8s ease-in-out infinite;
+  }
+  @keyframes floaty{
+    0%{transform:translateY(0) rotate(0)}
+    50%{transform:translateY(-22px) rotate(6deg)}
+    100%{transform:translateY(0) rotate(0)}
+  }
+
+  /* Loading spinner */
+  .spinner{
+    width:48px;height:48px;border-radius:50%;border:4px solid rgba(0,0,0,0.08);border-top-color:transparent;border-left-color:transparent;margin:16px auto;animation:spin 1s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  /* Footer */
+  footer{margin-top:44px;padding:20px;text-align:center;color:var(--muted);font-weight:600}
+
+  /* Accessibility focus for cards etc. */
+  a:focus,button:focus{outline:none; box-shadow:var(--focus-outline); border-radius:10px}
+
+  /* Media queries for breakpoints (768px and 480px) */
+  @media (max-width:768px){
+    .nav-inner{padding:10px}
+    .hero{padding:2rem 0}
+  }
+  @media (max-width:480px){
+    .nav-links{display:none}
+    .menu-btn{display:inline-block}
+    .hero-side{order:2}
+    .hero-card{padding:18px}
+  }
+</style>
+</head>
+<body>
+  <!-- Floating decorative shape (background) -->
+  <div class="float-shape" aria-hidden="true"></div>
+
+  <!-- Fixed glass navigation -->
+  <nav class="top-nav" aria-label="Main navigation">
+    <div class="nav-inner container" role="navigation">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">CW</div>
+        <div>
+          <div style="font-weight:800">CodeWizard</div>
+          <div style="font-size:12px;color:var(--muted)">Full-Stack Developer</div>
+        </div>
+      </div>
+
+      <div class="nav-links" role="menu" aria-hidden="false">
+        <a href="#home" role="menuitem">Home</a>
+        <a href="#about" role="menuitem">About</a>
+        <a href="#projects" role="menuitem">Projects</a>
+        <a href="#contact" role="menuitem">Contact</a>
+      </div>
+
+      <div class="controls" aria-hidden="false">
+        <div class="toggle" role="group" aria-label="Theme toggle">
+          <button id="theme-toggle" aria-pressed="false" title="Toggle theme">🌗</button>
+        </div>
+        <button class="menu-btn" aria-expanded="false" aria-controls="mobile-menu" id="menuBtn">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page container -->
+  <main class="container" id="home" tabindex="-1">
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-card" role="region" aria-label="Introduction">
+        <h1 id="hero-heading" class="title">CodeWizard</h1>
+        <p class="subtitle">I build performant, accessible, and delightful web experiences — full-stack (React / Node / Python) and vanilla web. I craft production-ready interfaces and APIs with an eye for performance, accessibility, and developer experience.</p>
+
+        <div class="badge" aria-hidden="false">
+          <span class="pulse-dot" aria-hidden="true"></span>
+          <span>Available for opportunities</span>
+        </div>
+
+        <div class="hero-ctas">
+          <button class="btn btn-primary" id="viewWorkBtn">View My Work</button>
+          <button class="btn btn-ghost" id="letsTalkBtn">Let's Talk</button>
+        </div>
+
+        <!-- Quick intro stats (visible on small screens) -->
+        <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
+          <div style="padding:8px 12px;border-radius:10px;background:linear-gradient(90deg,#eef2ff,#ecfeff);font-weight:800">👨‍💻 Full-Stack</div>
+          <div style="padding:8px 12px;border-radius:10px;background:linear-gradient(90deg,#fff0f6,#fff7ed);font-weight:800">✨ Modern UI</div>
+        </div>
+      </div>
+
+      <aside class="hero-side" aria-label="Snapshot">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div style="font-weight:800;font-size:0.95rem">Snapshot</div>
+            <div style="color:var(--muted);font-size:0.95rem">Selected metrics & recent projects</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-weight:800">Open to hire</div>
+            <div style="color:var(--muted)">Remote / Contract</div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px">
+          <div style="padding:12px;border-radius:10px;background:var(--card);box-shadow:var(--shadow-sm)">
+            <div style="font-size:1.25rem;font-weight:800" id="projCount">100+</div>
+            <div style="color:var(--muted)">Projects</div>
+          </div>
+          <div style="padding:12px;border-radius:10px;background:var(--card);box-shadow:var(--shadow-sm)">
+            <div style="font-size:1.25rem;font-weight:800" id="yearsExp">2+</div>
+            <div style="color:var(--muted)">Years Experience</div>
+          </div>
+        </div>
+
+        <div style="margin-top:12px">
+          <div style="font-weight:800">Top skills</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+            <div style="padding:8px 10px;border-radius:10px;background:linear-gradient(90deg,#06b6d4,#4f46e5);color:white;font-weight:700">JS</div>
+            <div style="padding:8px 10px;border-radius:10px;background:linear-gradient(90deg,#ff7ab6,#ffb86b);color:white;font-weight:700">React</div>
+            <div style="padding:8px 10px;border-radius:10px;background:linear-gradient(90deg,#67e8f9,#60a5fa);color:white;font-weight:700">Node</div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- STATS -->
+    <section id="about" aria-labelledby="about-heading">
+      <div style="display:flex;justify-content:space-between;align-items:end;gap:12px">
+        <h2 id="about-heading" style="font-size:2.2rem;margin:0">About & Stats</h2>
+        <div style="color:var(--muted)">Senior-grade portfolio layout • Accessible • Performance-minded</div>
+      </div>
+
+      <div class="stats" aria-hidden="false">
+        <div class="stat-card" tabindex="0" aria-label="Projects built">
+          <div class="stat-num" data-target="0" id="statProjects">100+</div>
+          <div class="stat-label">Projects Built</div>
+        </div>
+        <div class="stat-card" tabindex="0" aria-label="Years of experience">
+          <div class="stat-num" data-target="3" id="statYears">3</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat-card" tabindex="0" aria-label="Technologies">
+          <div class="stat-num" data-target="12" id="statTech">0</div>
+          <div class="stat-label">Technologies</div>
+        </div>
+        <div class="stat-card" tabindex="0" aria-label="Coffee consumed">
+          <div class="stat-num" data-target="999" id="statCoffee">3</div>
+          <div class="stat-label">Cups of coffee (not real)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="skills" aria-labelledby="skills-heading">
+      <h3 id="skills-heading" style="margin:0;font-size:1.6rem">Skills</h3>
+      <p style="color:var(--muted);margin-top:6px">Tools, frameworks and languages I use regularly.</p>
+
+      <div class="skill-grid" role="list">
+        <!-- Each skill card -->
+        <div class="skill" role="listitem" tabindex="0">
+          <div class="icon">💻</div>
+          <div class="meta"><div class="name">JavaScript</div><div class="level">Advanced</div></div>
+        </div>
+        <div class="skill" role="listitem" tabindex="0">
+          <div class="icon">⚛️</div>
+          <div class="meta"><div class="name">React</div><div class="level">Advanced</div></div>
+        </div>
+        <div class="skill" role="listitem" tabindex="0">
+          <div class="icon">🟢</div>
+          <div class="meta"><div class="name">Node.js</div><div class="level">Advanced</div></div>
+        </div>
+        <div class="skill" role="listitem" tabindex="0">
+          <div class="icon">🐍</div>
+          <div class="meta"><div class="name">Python</div><div class="level">Intermediate</div></div>
+        </div>
+        <div class="skill" role="listitem" tabindex="0">
+          <div class="icon">🎨</div>
+          <div class="meta"><div class="name">CSS / Design Systems</div><div class="level">Advanced</div></div>
+        </div>
+        <div class="skill" role="listitem" tabindex="0">
+          <div class="icon">☁️</div>
+          <div class="meta"><div class="name">Cloud / DevOps</div><div class="level">Intermediate</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="projects" id="projects" aria-labelledby="projects-heading">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+        <h2 id="projects-heading" style="font-size:2.2rem;margin:0">Projects</h2>
+        <div style="color:var(--muted)">Automatic GitHub folder → project cards</div>
+      </div>
+
+      <!-- Loading / error / content zone -->
+      <div id="projectsZone" style="margin-top:12px">
+        <!-- Loading state -->
+        <div id="loading" style="display:flex;align-items:center;gap:14px">
+          <div class="spinner" role="status" aria-hidden="true"></div>
+          <div style="color:var(--muted)">Fetching <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CodeWizard Projects</title>
+  <title>CodeWizard - Developer Portfolio</title>
   <style>
-    body {
-      margin: 0;
-      padding: 2rem;
-      background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    .header-container {
-      position: relative;
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-
-    h1 {
-      font-size: 3.2rem;
-      background: linear-gradient(to right, #6a11cb, #2575fc);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-weight: 900;
-      letter-spacing: 2px;
-      margin-bottom: 0.5rem;
-      text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      position: relative;
-      z-index: 1;
-    }
-
-    .subheading {
-      font-size: 1.1rem;
-      color: #555;
-      font-style: italic;
-      margin-bottom: 1.5rem;
-      z-index: 1;
-      position: relative;
-    }
-
-    .header-container::before,
-    .header-container::after {
-      content: "";
-      position: absolute;
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      background: radial-gradient(circle, #d1c4e9, #b39ddb);
-      z-index: 0;
-      opacity: 0.4;
-    }
-
-    .header-container::before {
-      top: -40px;
-      left: -50px;
-    }
-
-    .header-container::after {
-      top: -40px;
-      right: -50px;
-    }
-
-    .projects-wrapper {
-      max-width: 800px;
-      margin: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .project-card {
-      background: linear-gradient(to right, #f0f8ff, #d0eaff);
-      padding: 1.5rem;
-      border-radius: 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .project-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
-    }
-
-    .project-name {
-      font-size: 1.3rem;
-      font-weight: 600;
-      color: #34495e;
-      text-transform: capitalize;
-    }
-
-    .button-group {
-      display: flex;
-      gap: 0.5rem;
-    }
-
-    .button-group a {
-      background-color: #ffd86b;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 600;
-      text-decoration: none;
-      color: #333;
-      transition: background-color 0.3s ease, transform 0.1s ease;
-    }
-
-    .button-group a:hover {
-      background-color: #ffcf3b;
-    }
-
-    .button-group a:active {
-      transform: scale(0.95);
-    }
-
-    @media (max-width: 600px) {
-      .project-card {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-      }
-
-      .button-group {
-        width: 100%;
-        justify-content: flex-start;
-      }
-    }
-  </style>
-</head>
-<body>
-
-  <div class="header-container">
-    <h1>CodeWizard</h1>
-    <p class="subheading">Crafting Cool Projects, One Line at a Time</p>
-  </div>
-
-  <div class="projects-wrapper" id="projects-wrapper">
-    <!-- Cards will be injected here -->
-  </div>
-
-  <script>
-    const username = 'ronit-codewizard';
-    const repo = 'CodeWizard';
-    const wrapper = document.getElementById('projects-wrapper');
-
-    async function fetchProjects() {
-      try {
-        const res = await fetch(`https://api.github.com/repos/${username}/${repo}/contents`);
-        const data = await res.json();
-
-        const projects = data.filter(item => item.type === "dir").sort((a, b) => a.name.localeCompare(b.name));
-
-        if (projects.length === 0) {
-          wrapper.innerHTML = '<p>No projects found in the repository.</p>';
-          return;
-        }
-
-        projects.forEach(item => {
-          const projectName = item.name.replace(/-/g, ' ');
-          const card = document.createElement('div');
-          card.className = 'project-card';
-          card.innerHTML = `
-            <div class="project-name">${projectName}</div>
-            <div class="button-group">
-              <a href="https://${username}.github.io/${repo}/${item.name}" target="_blank">Live Demo</a>
-              <a href="https://github.com/${username}/${repo}/tree/main/${item.name}" target="_blank">Source Code</a>
-            </div>
-          `;
-          wrapper.appendChild(card);
-        });
-
-      } catch (error) {
-        console.error('Error fetching projects:', error);
-        wrapper.innerHTML = '<p>Failed to load projects. Please try again later.</p>';
-      }
-    }
-
-    fetchProjects();
-  </script>
-</body>
-</html>
+    :root {
+      /* Light theme */
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-card: #ffffff;
+      --text-primary: #1e293b;
+      --text-secondary: #64748b;
+      --text-muted: #94a3b8;
+      --accent-primary: #3b82f6;
+      --accent-secondary: #8b5cf6;
+      --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+      --border-color: #e2e8f0;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0

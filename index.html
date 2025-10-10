@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CodeWizard - Creative Developer</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://kit.fontawesome.com/8a88ca13c1.js" crossorigin="anonymous"></script>
+    <script>
+    import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTypescript } from '@fortawesome/free-brands-svg-icons';
+<FontAwesomeIcon icon={faTypescript} /> </script>
     <style>
         :root {
             --primary: #00f5ff;
@@ -455,7 +460,23 @@
             transform: translateY(-2px);
         }
 
-        .about-grid {
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+        }
+
+        .loading i {
+            animation: spin 1s linear infinite;
+            margin-right: 0.5rem;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+          .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 5rem;
@@ -587,6 +608,13 @@
             flex-wrap: wrap;
         }
 
+        .social-links {
+            margin-top: 3rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
         .social-link {
             width: 60px;
             height: 60px;
@@ -607,6 +635,26 @@
             box-shadow: var(--glow-primary);
             background: var(--primary);
             color: var(--bg-dark);
+        }
+
+        .social-link.instagram:hover {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: white;
+        }
+
+        .social-link.github:hover {
+            background: #333;
+            color: white;
+        }
+
+        .social-link.twitter:hover {
+            background: #1DA1F2;
+            color: white;
+        }
+
+        .social-link.linkedin:hover {
+            background: #0077B5;
+            color: white;
         }
 
         footer {
@@ -667,6 +715,38 @@
                 grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
             }
         }
+    
+    .logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: var(--gradient-hero);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 0em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0rem;
+}
+
+.logo-img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+.logo-text {
+    background: var(--gradient-hero);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.logo-text::after {
+    content: '_';
+    animation: blink 1s infinite;
+}
     </style>
 </head>
 <body>
@@ -678,7 +758,10 @@
 
     <nav>
         <div class="nav-container">
-            <div class="logo">CodeWizard</div>
+            <div class="logo">
+    <img src="https://i.ibb.co/Q7YrGDgz/20251010-012744.png" alt="CodeWizard Logo" class="logo-img">
+    <span class="logo-text">CodeWizard</span>
+</div>
             <div class="nav-menu">
                 <a href="#home">Home</a>
                 <a href="#projects">Projects</a>
@@ -708,131 +791,12 @@
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Featured Projects</h2>
-                <p class="section-subtitle">A showcase of my recent work, from web apps to creative experiments</p>
+                <p class="section-subtitle">A showcase of my recent work, loaded dynamically from GitHub</p>
             </div>
 
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-visual">🚀</div>
-                    <div class="project-content">
-                        <div class="project-header">
-                            <h3 class="project-title">NexaCommerce</h3>
-                            <span class="project-badge">Featured</span>
-                        </div>
-                        <p class="project-desc">Full-stack e-commerce platform with AI-powered recommendations, real-time inventory, and seamless payment processing.</p>
-                        <div class="project-tech">
-                            <span class="tech-badge">React</span>
-                            <span class="tech-badge">Node.js</span>
-                            <span class="tech-badge">PostgreSQL</span>
-                            <span class="tech-badge">Stripe</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link">View Code</a>
-                            <a href="#" class="project-link">Live Demo</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-visual">🎨</div>
-                    <div class="project-content">
-                        <div class="project-header">
-                            <h3 class="project-title">DesignFlow</h3>
-                            <span class="project-badge">Tool</span>
-                        </div>
-                        <p class="project-desc">Collaborative design system manager with real-time updates, version control, and component library generation.</p>
-                        <div class="project-tech">
-                            <span class="tech-badge">Vue.js</span>
-                            <span class="tech-badge">Firebase</span>
-                            <span class="tech-badge">Figma API</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link">View Code</a>
-                            <a href="#" class="project-link">Live Demo</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-visual">📊</div>
-                    <div class="project-content">
-                        <div class="project-header">
-                            <h3 class="project-title">DataViz Pro</h3>
-                            <span class="project-badge">SaaS</span>
-                        </div>
-                        <p class="project-desc">Advanced analytics dashboard with customizable widgets, real-time data streaming, and AI-driven insights.</p>
-                        <div class="project-tech">
-                            <span class="tech-badge">Next.js</span>
-                            <span class="tech-badge">D3.js</span>
-                            <span class="tech-badge">Python</span>
-                            <span class="tech-badge">AWS</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link">View Code</a>
-                            <a href="#" class="project-link">Live Demo</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-visual">🎮</div>
-                    <div class="project-content">
-                        <div class="project-header">
-                            <h3 class="project-title">Retro Arcade</h3>
-                            <span class="project-badge">Game</span>
-                        </div>
-                        <p class="project-desc">Browser-based retro gaming platform with multiplayer support, leaderboards, and customizable controls.</p>
-                        <div class="project-tech">
-                            <span class="tech-badge">TypeScript</span>
-                            <span class="tech-badge">Canvas API</span>
-                            <span class="tech-badge">WebSocket</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link">View Code</a>
-                            <a href="#" class="project-link">Play Now</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-visual">🌐</div>
-                    <div class="project-content">
-                        <div class="project-header">
-                            <h3 class="project-title">API Gateway</h3>
-                            <span class="project-badge">Backend</span>
-                        </div>
-                        <p class="project-desc">Scalable API gateway with rate limiting, authentication, caching, and comprehensive monitoring tools.</p>
-                        <div class="project-tech">
-                            <span class="tech-badge">Go</span>
-                            <span class="tech-badge">Redis</span>
-                            <span class="tech-badge">Docker</span>
-                            <span class="tech-badge">K8s</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link">View Code</a>
-                            <a href="#" class="project-link">Docs</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-visual">🤖</div>
-                    <div class="project-content">
-                        <div class="project-header">
-                            <h3 class="project-title">AI Assistant</h3>
-                            <span class="project-badge">ML</span>
-                        </div>
-                        <p class="project-desc">Intelligent chatbot with natural language processing, context awareness, and integration with popular tools.</p>
-                        <div class="project-tech">
-                            <span class="tech-badge">Python</span>
-                            <span class="tech-badge">TensorFlow</span>
-                            <span class="tech-badge">FastAPI</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link">View Code</a>
-                            <a href="#" class="project-link">Try It</a>
-                        </div>
-                    </div>
+            <div class="projects-grid" id="projectsGrid">
+                <div class="loading">
+                    <i class="fas fa-spinner"></i> Loading projects from GitHub...
                 </div>
             </div>
         </div>
@@ -853,15 +817,15 @@
 
                 <div class="stats-grid">
                     <div class="stat-card">
-                        <div class="stat-number">50+</div>
+                        <div class="stat-number" id="projectCount">50+</div>
                         <div class="stat-label">Projects</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-number">5+</div>
+                        <div class="stat-number">3+</div>
                         <div class="stat-label">Years</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-number">30+</div>
+                        <div class="stat-number">25+</div>
                         <div class="stat-label">Clients</div>
                     </div>
                     <div class="stat-card">
@@ -882,23 +846,23 @@
 
             <div class="skills-container">
                 <div class="skill-card">
-                    <div class="skill-icon">⚛️</div>
-                    <div class="skill-name">React</div>
+                    <div class="skill-icon"><i class="fa-brands fa-html5"></i></div>
+                    <div class="skill-name">HTML</div>
                 </div>
                 <div class="skill-card">
-                    <div class="skill-icon">📱</div>
-                    <div class="skill-name">React Native</div>
+                    <div class="skill-icon"><i class="fa-brands fa-css"></i></div>
+                    <div class="skill-name">CSS/SCSS</div>
                 </div>
                 <div class="skill-card">
-                    <div class="skill-icon">🟢</div>
-                    <div class="skill-name">Node.js</div>
+                    <div class="skill-icon"><i class="fa-brands fa-js"></i></div>
+                    <div class="skill-name">JavaScript</div>
                 </div>
                 <div class="skill-card">
-                    <div class="skill-icon">🐍</div>
+                    <div class="skill-icon"><i class="fa-brands fa-python"></i></div>
                     <div class="skill-name">Python</div>
                 </div>
                 <div class="skill-card">
-                    <div class="skill-icon">📘</div>
+                    <div class="skill-icon"><i class="fa-brands fa-typescript"></i></div>
                     <div class="skill-name">TypeScript</div>
                 </div>
                 <div class="skill-card">
@@ -940,22 +904,30 @@
                 <p>Have a project in mind or just want to chat? I'm always open to discussing new opportunities and creative ideas.</p>
                 
                 <div class="contact-buttons">
-                    <a href="#" class="btn btn-primary">Email Me</a>
+                    <a href="mailto:ronitmajhi@zohomail.in" class="btn btn-primary">Email Me</a>
                     <a href="#" class="btn btn-secondary">Download CV</a>
                 </div>
                 
-                <div style="margin-top: 3rem; display: flex; gap: 1rem; justify-content: center;">
-                    <a href="#" class="social-link" <class="fas fa-tv"></a>
-                    <a href="#" class="social-link">🐙</a>
-                    <a href="#" class="social-link">🐦</a>
-                    <a href="#" class="social-link">📷</a>
+                <div class="social-links">
+                    <a href="https://instagram.com/codewizard.inc" class="social-link instagram" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://github.com/Ronit-CodeWizard" class="social-link github" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://twitter.com/yourprofile" class="social-link twitter" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-brands fa-x-twitter"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/ronit-majhi-531bb6304?" class="social-link linkedin" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2025 CodeWizard.inc. Designed & Built with 💜</p>
+        <p>&copy; 2025 CodeWizard.inc | Designed & Built with 💜</p>
     </footer>
 
     <script>
@@ -1001,12 +973,86 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.project-card, .skill-card, .stat-card').forEach(el => {
+        document.querySelectorAll('.skill-card, .stat-card').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(30px)';
             el.style.transition = 'all 0.6s ease';
             observer.observe(el);
         });
+
+        // GitHub Projects Loader
+        const username = 'Ronit-CodeWizard';
+        const repoName = 'CodeWizard';
+
+        async function loadProjects() {
+            const projectsGrid = document.getElementById('projectsGrid');
+            
+            try {
+                const response = await fetch(`https://api.github.com/repos/${username}/${repoName}/contents/`);
+                const data = await response.json();
+                
+                // Filter only directories
+                const folders = data.filter(item => item.type === 'dir');
+                
+                if (folders.length === 0) {
+                    projectsGrid.innerHTML = '<p style="text-align:center;color:var(--text-secondary)">No projects found yet.</p>';
+                    return;
+                }
+                
+                // Update project count
+                document.getElementById('projectCount').textContent = folders.length;
+                
+                // Generate project cards
+                const projectCards = folders.map((folder, index) => {
+                    const icons = ['🚀', '🎨', '📊', '🎮', '🌐', '🤖'];
+                    const badges = ['Featured', 'Tool', 'SaaS', 'Game', 'Backend', 'ML'];
+                    const gradients = ['gradient-2', 'gradient-1', 'gradient-3'];
+                    
+                    return `
+                        <div class="project-card">
+                            <div class="project-visual" style="background: var(--${gradients[index % 3]})">
+                                ${icons[index % icons.length]}
+                            </div>
+                            <div class="project-content">
+                                <div class="project-header">
+                                    <h3 class="project-title">${folder.name}</h3>
+                                    <span class="project-badge">${badges[index % badges.length]}</span>
+                                </div>
+                                <p class="project-desc">Check out this amazing project on GitHub!</p>
+                                <div class="project-tech">
+                                    <span class="tech-badge">JavaScript</span>
+                                    <span class="tech-badge">HTML</span>
+                                    <span class="tech-badge">CSS</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="https://github.com/${username}/${repoName}/tree/main/${folder.name}" 
+                                       class="project-link" target="_blank" rel="noopener noreferrer">View Source</a>
+                                    <a href="https://${username}.github.io/${repoName}/${folder.name}" 
+                                       class="project-link" target="_blank" rel="noopener noreferrer">Live Demo</a>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                
+                projectsGrid.innerHTML = projectCards;
+                
+                // Animate cards
+                document.querySelectorAll('.project-card').forEach(el => {
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateY(30px)';
+                    el.style.transition = 'all 0.6s ease';
+                    observer.observe(el);
+                });
+                
+            } catch (error) {
+                console.error('Error loading projects:', error);
+                projectsGrid.innerHTML = '<p style="text-align:center;color:var(--text-secondary)">Error loading projects. Please check the repository name.</p>';
+            }
+        }
+
+        // Load projects when page loads
+        loadProjects();
     </script>
 </body>
 </html>

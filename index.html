@@ -13,6 +13,7 @@
             --secondary: #ff00f5;
             --accent: #f5ff00;
             --bg-dark: #0a0e27;
+            --bg-menu: ;
             --bg-card: #141937;
             --bg-elevated: #1a1f3a;
             --text-primary: #ffffff;
@@ -33,6 +34,7 @@
             --bg-dark: #f8fafc;
             --bg-card: #ffffff;
             --bg-elevated: #f1f5f9;
+            --bg-elevated-menu: rgba(255, 255, 255, 0.75);
             --text-primary: #0f172a;
             --text-secondary: #475569;
             --text-dim: #94a3b8;
@@ -48,16 +50,24 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -webkit-user-drag: none;
+            
+            user-drag: none;
         }
 
         body {
             font-family: 'Space Grotesk', sans-serif;
-    background: var(--bg-dark);
-    color: var(--text-primary);
-    overflow-x: hidden;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
 }
 
         .animated-bg {
@@ -169,7 +179,7 @@
 
         .logo-text::after {
             content: '_';
-            animation: blink 1s infinite;
+            animation: blink 10s infinite;
         }
 
         @keyframes blink {
@@ -329,7 +339,7 @@
                 right: -100%;
                 width: 280px;
                 height: 100vh;
-                background: var(--bg-card);
+                background: var(--bg-menu);
                 backdrop-filter: blur(20px);
                 flex-direction: column;
                 padding: 6rem 2rem 2rem;
@@ -341,7 +351,7 @@
             }
 
             [data-theme="light"] .nav-links {
-                background: var(--bg-elevated);
+                background: var(--bg-elevated-menu);
                 box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
             }
 
@@ -392,6 +402,7 @@
             .logo {
                 font-size: 1.2rem;
                 gap: 0.4rem;
+                z-index: 500;
             }
 
             .logo-img {
@@ -1131,7 +1142,7 @@
                                     <stop stop-color="#FFE052" offset="0%"/>
                                     <stop stop-color="#FFC331" offset="100%"/>
                                 </linearGradient>
-                            </defs>
+#                            </defs>
                             <path d="M126.916.072c-64.832 0-60.784 28.115-60.784 28.115l.072 29.128h61.868v8.745H41.631S.145 61.355.145 126.77c0 65.417 36.21 63.097 36.21 63.097h21.61v-30.356s-1.165-36.21 35.632-36.21h61.362s34.475.557 34.475-33.319V33.97S194.67.072 126.916.072zM92.802 19.66a11.12 11.12 0 0 1 11.13 11.13 11.12 11.12 0 0 1-11.13 11.13 11.12 11.12 0 0 1-11.13-11.13 11.12 11.12 0 0 1 11.13-11.13z" fill="url(#pythonGradientA)"/>
                             <path d="M128.757 254.126c64.832 0 60.784-28.115 60.784-28.115l-.072-29.127H127.6v-8.745h86.441s41.486 4.705 41.486-60.712c0-65.416-36.21-63.096-36.21-63.096h-21.61v30.355s1.165 36.21-35.632 36.21h-61.362s-34.475-.557-34.475 33.32v56.013s-5.235 33.897 62.518 33.897zm34.114-19.586a11.12 11.12 0 0 1-11.13-11.13 11.12 11.12 0 0 1 11.13-11.131 11.12 11.12 0 0 1 11.13 11.13 11.12 11.12 0 0 1-11.13 11.13z" fill="url(#pythonGradientB)"/>
                         </svg>
@@ -1159,7 +1170,7 @@
                     <div class="skill-name">Node.js</div>
                 </div>
                 <div class="skill-card">
-                    <div class="skill-icon"><i class="fab fa-less" style="color: #1D365D;"></i></div>
+                    <div class="skill-icon"><i class="fab fa-less" style="color: #254577;"></i></div>
                     <div class="skill-name">Less</div>
                 </div>
                 <div class="skill-card">
@@ -1196,7 +1207,7 @@
                     <a href="https://github.com/Ronit-CodeWizard" class="social-link github" target="_blank" rel="noopener noreferrer">
                         <i class="fab fa-github"></i>
                     </a>
-                    <a href="https://twitter.com/yourprofile" class="social-link twitter" target="_blank" rel="noopener noreferrer">
+                    <a href="https://twitter.com/itz_codewizard" class="social-link twitter" target="_blank" rel="noopener noreferrer">
                         <i class="fa-brands fa-x-twitter"></i>
                     </a>
                     <a href="https://www.linkedin.com/in/ronit-majhi-531bb6304" class="social-link linkedin" target="_blank" rel="noopener noreferrer">

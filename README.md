@@ -17,7 +17,7 @@ From animated input fields to beautiful tab bars and loaders — it's all there!
 ## 🔗 Let's Connect
 
 - [GitHub](https://github.com/Ronit-CodeWizard) 
-- [Social Links](https://bento.me/Ronit-CodeWizard)
+- [Social Links](https://ronit-codewizard.github.io/SOCIAL/)
 - [LinkedIn](https://www.linkedin.com/in/ronit-majhi-531bb6304)
 
 ---

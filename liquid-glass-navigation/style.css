@@ -1,0 +1,589 @@
+/* =========================================================
+   TOKENS
+   ========================================================= */
+
+:root {
+  --bg: #eef1f6;
+
+  --blob-a: #ff375f;
+  --blob-b: #0a84ff;
+  --blob-c: #ffd60a;
+  --blob-opacity: 0.5;
+
+  --glass-bg: rgba(255, 255, 255, 0.16);
+  --glass-border: rgba(255, 255, 255, 0.55);
+  --glass-shadow: rgba(20, 20, 40, 0.16);
+
+  --pill-bg: rgba(255, 255, 255, 0.75);
+
+  --pill-shadow:
+    0 6px 16px rgba(20, 20, 40, 0.12),
+    inset 0 1px 1px rgba(255, 255, 255, 0.9);
+
+  --glare-color: rgba(255, 255, 255, 0.5);
+
+  --metaball-bg: rgba(255, 255, 255, 0.75);
+
+  --ink-dim: rgba(20, 20, 30, 0.5);
+  --ink: rgba(15, 15, 25, 0.94);
+
+  --divider: rgba(20, 20, 30, 0.14);
+
+  --ease-spring:
+    cubic-bezier(0.34, 1.4, 0.64, 1);
+
+  --ease-out:
+    cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* =========================================================
+   DARK THEME
+   ========================================================= */
+
+[data-theme="dark"] {
+
+  --bg: #050506;
+
+  --blob-a: #bf5af2;
+  --blob-b: #30d5c8;
+  --blob-c: #ff6b4a;
+  --blob-opacity: 0.3;
+
+  --glass-bg: rgba(28, 28, 32, 0.5);
+  --glass-border: rgba(255, 255, 255, 0.14);
+  --glass-shadow: rgba(0, 0, 0, 0.7);
+
+  --pill-bg: rgba(70, 70, 76, 0.85);
+
+  --pill-shadow:
+    0 6px 16px rgba(0, 0, 0, 0.45),
+    inset 0 1px 1px rgba(255, 255, 255, 0.16);
+
+  --glare-color: rgba(255, 255, 255, 0.15);
+
+  --metaball-bg: rgba(70, 70, 76, 0.85);
+
+  --ink-dim: rgba(255, 255, 255, 0.5);
+  --ink: #ffffff;
+
+  --divider: rgba(255, 255, 255, 0.14);
+}
+
+
+/* =========================================================
+   RESET & STAGE
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+html,
+body {
+  height: 100%;
+}
+
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  min-height: 100vh;
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Text",
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+
+  background: var(--bg);
+
+  overflow: hidden;
+
+  -webkit-font-smoothing: antialiased;
+}
+
+
+/* =========================================================
+   BACKGROUND MESH
+   ========================================================= */
+
+.mesh {
+  position: fixed;
+  inset: 0;
+
+  z-index: -1;
+
+  overflow: hidden;
+}
+
+
+.blob {
+  position: absolute;
+
+  border-radius: 50%;
+
+  filter: blur(90px);
+
+  opacity: var(--blob-opacity);
+
+  will-change: transform;
+
+  animation:
+    drift 24s infinite alternate var(--ease-out);
+
+  transition:
+    background 0.6s ease,
+    opacity 0.6s ease;
+}
+
+
+.blob-a {
+  width: 46vw;
+  height: 46vw;
+
+  top: -12%;
+  left: -10%;
+
+  background: var(--blob-a);
+}
+
+
+.blob-b {
+  width: 42vw;
+  height: 42vw;
+
+  bottom: -14%;
+  right: -8%;
+
+  background: var(--blob-b);
+
+  animation-delay: -8s;
+}
+
+
+.blob-c {
+  width: 30vw;
+  height: 30vw;
+
+  top: 32%;
+  left: 42%;
+
+  background: var(--blob-c);
+
+  animation-delay: -16s;
+}
+
+
+@keyframes drift {
+
+  0% {
+    transform:
+      translate(0, 0)
+      scale(1);
+  }
+
+  50% {
+    transform:
+      translate(6%, 8%)
+      scale(1.08);
+  }
+
+  100% {
+    transform:
+      translate(-6%, -6%)
+      scale(0.96);
+  }
+
+}
+
+
+/* =========================================================
+   NAVIGATION SHELL
+   ========================================================= */
+
+.liquid-nav {
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  gap: 4px;
+
+  padding: 8px;
+
+  border-radius: 999px;
+
+  background: var(--glass-bg);
+
+  backdrop-filter:
+    blur(36px)
+    saturate(180%);
+
+  -webkit-backdrop-filter:
+    blur(36px)
+    saturate(180%);
+
+  box-shadow:
+    0 30px 60px -18px var(--glass-shadow),
+    0 8px 20px -8px var(--glass-shadow),
+    inset 0 0 0 1px var(--glass-border);
+
+  transition:
+    background 0.5s ease,
+    box-shadow 0.5s ease;
+}
+
+
+/* =========================================================
+   LIQUID GLARE
+   ========================================================= */
+
+.liquid-glare-container {
+
+  position: absolute;
+
+  inset: 0;
+
+  border-radius: 999px;
+
+  overflow: hidden;
+
+  pointer-events: none;
+
+  z-index: 5;
+}
+
+
+.liquid-glare {
+
+  position: absolute;
+
+  inset: 0;
+
+  opacity: 0;
+
+  transition:
+    opacity 0.3s ease;
+
+  background:
+    radial-gradient(
+      circle 90px
+      at var(--x, 50%) var(--y, 50%),
+      var(--glare-color) 0%,
+      transparent 100%
+    );
+
+  mix-blend-mode: overlay;
+}
+
+
+.liquid-nav:hover .liquid-glare {
+  opacity: 1;
+}
+
+
+/* =========================================================
+   TABS
+   ========================================================= */
+
+.tabs {
+
+  position: relative;
+
+  display: flex;
+
+  gap: 2px;
+
+  z-index: 3;
+}
+
+
+.active-pill {
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  height: 44px;
+
+  border-radius: 999px;
+
+  background: var(--pill-bg);
+
+  box-shadow: var(--pill-shadow);
+
+  z-index: 1;
+
+  transition:
+    transform 0.5s var(--ease-spring),
+    width 0.5s var(--ease-spring),
+    background 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+
+/* =========================================================
+   TAB BUTTONS
+   ========================================================= */
+
+button.tab {
+
+  position: relative;
+
+  z-index: 2;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  height: 44px;
+
+  padding: 0 18px;
+
+  border: none;
+
+  background: transparent;
+
+  border-radius: 999px;
+
+  font: inherit;
+
+  font-size: 14.5px;
+
+  font-weight: 600;
+
+  letter-spacing: -0.01em;
+
+  color: var(--ink-dim);
+
+  cursor: pointer;
+
+  outline: none;
+
+  -webkit-tap-highlight-color: transparent;
+
+  transition:
+    color 0.3s ease;
+}
+
+
+button.tab[aria-selected="true"] {
+  color: var(--ink);
+}
+
+
+button.tab .icon {
+
+  display: flex;
+
+  transition:
+    transform 0.2s var(--ease-out);
+}
+
+
+button.tab:active .icon {
+  transform: scale(0.88);
+}
+
+
+/* =========================================================
+   FOCUS
+   ========================================================= */
+
+button.tab:focus-visible,
+.theme-toggle:focus-visible {
+
+  box-shadow:
+    0 0 0 2px var(--bg),
+    0 0 0 4px var(--blob-b);
+}
+
+
+/* =========================================================
+   DIVIDER
+   ========================================================= */
+
+.divider {
+
+  width: 1px;
+  height: 22px;
+
+  background: var(--divider);
+
+  margin: 0 4px;
+
+  z-index: 3;
+
+  transition:
+    background 0.5s ease;
+}
+
+
+/* =========================================================
+   THEME TOGGLE
+   ========================================================= */
+
+.theme-toggle {
+
+  position: relative;
+
+  z-index: 3;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 44px;
+  height: 44px;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: transparent;
+
+  color: var(--ink-dim);
+
+  cursor: pointer;
+
+  outline: none;
+
+  -webkit-tap-highlight-color: transparent;
+
+  transition:
+    color 0.3s ease,
+    background 0.3s ease;
+}
+
+
+.theme-toggle:hover {
+  color: var(--ink);
+}
+
+
+.theme-toggle:active .icon-stack {
+  transform: scale(0.82);
+}
+
+
+/* =========================================================
+   SUN / MOON ICON
+   ========================================================= */
+
+.icon-stack {
+
+  position: relative;
+
+  width: 20px;
+  height: 20px;
+
+  transition:
+    transform 0.2s var(--ease-out);
+}
+
+
+.icon-stack svg {
+
+  position: absolute;
+
+  inset: 0;
+
+  stroke-width: 2.1;
+
+  transition:
+    transform 0.55s var(--ease-spring),
+    opacity 0.35s ease;
+}
+
+
+.icon-sun {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+
+.icon-moon {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.4);
+}
+
+
+[data-theme="dark"] .icon-sun {
+
+  opacity: 0;
+
+  transform:
+    rotate(90deg)
+    scale(0.4);
+}
+
+
+[data-theme="dark"] .icon-moon {
+
+  opacity: 1;
+
+  transform:
+    rotate(0deg)
+    scale(1);
+}
+
+
+/* =========================================================
+   ACCESSIBILITY / REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .blob {
+    animation: none;
+  }
+
+  .active-pill,
+  .icon-stack svg,
+  button.tab,
+  .icon {
+
+    transition-duration:
+      0.01ms !important;
+  }
+
+}
+
+
+/* =========================================================
+   SCREEN READER ONLY
+   ========================================================= */
+
+.sr-only {
+
+  position: absolute;
+
+  width: 1px;
+  height: 1px;
+
+  padding: 0;
+  margin: -1px;
+
+  overflow: hidden;
+
+  clip: rect(0, 0, 0, 0);
+
+  white-space: nowrap;
+
+  border: 0;
+  }

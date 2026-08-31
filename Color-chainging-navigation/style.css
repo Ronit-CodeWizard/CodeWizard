@@ -4,6 +4,16 @@
         box-sizing: border-box;
 }
 
+* {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+}
+
+
 body {
         --activeclr: #e4ecfa;
         margin: 0;

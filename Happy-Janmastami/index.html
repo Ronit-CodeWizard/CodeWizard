@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeWizard - Happy Janmashtami</title>
+  <style>
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: #000;
+    }
+
+    #screen {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      display: block;
+      border: 0;
+      outline: 0;
+      pointer-events: none;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    
+    const screen = document.createElement("video");
+
+    screen.id = "screen";
+    screen.src = "video.mp4";
+    screen.autoplay = true;
+    screen.loop = true;
+    screen.muted = false;
+    screen.playsInline = true;
+    screen.controls = false;
+    screen.setAttribute("controlsList", "nodownload noplaybackrate");
+    screen.setAttribute("disablePictureInPicture", "");
+
+    document.body.appendChild(screen);
+
+    
+    const start = () => {
+      screen.muted = false;
+      screen.play().catch(() => {});
+    };
+
+    start();
+    window.addEventListener("click", start, { once: true });
+    window.addEventListener("keydown", start, { once: true });
+    window.addEventListener("touchstart", start, { once: true, passive: true });
+  </script>
+</body>
+</html>
+
